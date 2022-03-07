@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+
+  <title>TwitterTrends-24</title>
+</head>
+
+<body>
+  <header>
+    <h1>TwitterTrends-24</h1>
+    <p>ツイッターでトレンド入りした話題をランキング表示</p>
+  </header>
+  <main>
+    <section>
+        <h5>{{ trend.date }}のトレンド</h5>
+        <ol type="1">
+            {% for rank in trend.topics %}
+            <!-- <li><span>{{ rank.number }}</span>{{ rank.topic_name }}</li> -->
+            <li><a href={{ rank.url }}>{{ rank.topic }}</a></li>
+            {% endfor %}
+        </ol>
+    </section>
+  </main>
+  <footer>
+</body>
+
+</html>

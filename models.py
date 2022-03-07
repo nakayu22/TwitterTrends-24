@@ -1,0 +1,13 @@
+from sqlalchemy import Column, Integer, DateTime, PickleType
+from database import Base
+
+
+class Trends(Base):
+    __tablename__ = 'twitter_trends'
+    id = Column(Integer, primary_key=True)
+    trends = Column(PickleType)
+    created = Column(DateTime)
+
+
+    def __repr__(self):
+        return f'id={self.id!r}\ntrends={self.trends}\ncreatedat={self.created}'
