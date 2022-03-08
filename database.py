@@ -15,13 +15,16 @@ def init_db():
 
 
 def get_trends():
-    data = db_session.query(models.Trends).first()
+    datum = db_session.query(models.Trends).order_by(models.Trends.created.desc()).limit(12)
     
-    date = str(data.created.month)+'月'+str(data.created.day)+'日'+str(data.created.hour)+'時'
-    topics = []
-    for t in data.trends:
-        topics.append({'topic': t[0], 'url': t[1]})
-    
-    trend = {'date': date, 'topics': topics}
+    trends = []
+    for data in datum:
+        date = str(data.created.month)+'月'+str(data.created.day)+'日'+str(data.created.hour)+'時'
+        topics = []
+        for i, t in enumerate(data.trends):
+            topics.append({'rank': i+1, 'topic': t[0], 'url': t[1]})
+        
+        trend = {'date': date, 'topics': topics}
+        trends.append(trend)
 
-    return trend
+    return trends

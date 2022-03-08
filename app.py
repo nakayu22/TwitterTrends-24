@@ -5,5 +5,5 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
-    trend = get_trends()
-    return render_template("index.html", trend=trend)
+    trends = get_trends()
+    return render_template("index.html", trends=trends)
