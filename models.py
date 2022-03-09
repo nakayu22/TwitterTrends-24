@@ -9,5 +9,10 @@ class Trends(Base):
     created = Column(DateTime)
 
 
+    def __init__(self, trends=None, created=None):
+        self.trends = trends
+        self.created = created
+
+
     def __repr__(self):
         return f'id={self.id!r}\ntrends={self.trends}\ncreatedat={self.created}'
