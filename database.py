@@ -14,9 +14,9 @@ Token       = os.getenv("TOKEN")
 Token_Sec   = os.getenv("TOKEN_SEC")
 
 
-engine = create_engine('sqlite:///test.db')
-# DB_URI = os.getenv("DB_URI")
-# engine = create_engine(DB_URI)
+# engine = create_engine('sqlite:///test.db')
+DB_URI = os.getenv("DB_URI")
+engine = create_engine(DB_URI)
 db_session = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
 Base = declarative_base()
 Base.query = db_session.query_property()
