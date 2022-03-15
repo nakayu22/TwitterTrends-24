@@ -2,7 +2,7 @@ from sqlalchemy import Column, Integer, DateTime, PickleType
 from database import Base
 
 
-class Trends(Base):
+class Ttrends(Base):
     __tablename__ = 'twitter_trends'
     id = Column(Integer, primary_key=True)
     trends = Column(PickleType)

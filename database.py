@@ -14,9 +14,9 @@ Token       = os.getenv("TOKEN")
 Token_Sec   = os.getenv("TOKEN_SEC")
 
 
-# engine = create_engine('sqlite:///test.db')
-DB_URI = os.getenv("DB_URI")
-engine = create_engine(DB_URI)
+# DB_URI = os.getenv("DB_URI")
+# engine = create_engine(DB_URI)
+engine = create_engine(os.getenv('DATABASE_URL').replace('postgres', 'postgresql'))
 db_session = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
 Base = declarative_base()
 Base.query = db_session.query_property()
@@ -28,7 +28,7 @@ def init_db():
 
 
 def get_trends():
-    datum = db_session.query(models.Trends).order_by(models.Trends.created.desc()).limit(12)
+    datum = db_session.query(models.Ttrends).order_by(models.Ttrends.created.desc()).limit(12)
     
     trends = []
     for data in datum:
@@ -59,10 +59,9 @@ def store_ttrends():
         trends.append(list(d.values()))
 
     # 現在の日本の時刻
-    tz_jst = datetime.timezone(datetime.timedelta(hours=9))
-    now = datetime.datetime.now(tz=tz_jst)
+    now = datetime.datetime.now()
 
-    t = models.Trends(trends=trends, created=now)
+    t = models.Ttrends(trends=trends, created=now)
     db_session.add(t)
     db_session.commit()
 
@@ -70,16 +69,11 @@ def store_ttrends():
 
 
 def delete_ttrends():
-    tz_jst = datetime.timezone(datetime.timedelta(hours=9))
-    now = datetime.datetime.now(tz=tz_jst)
+    now = datetime.datetime.now()
     last = now + datetime.timedelta(days=-31)
 
-    data = db_session.query(models.Trends).filter(models.Trends.created < now).all()
+    data = db_session.query(models.Ttrends).filter(models.Ttrends.created < now).all()
     db_session.delete(data)
     db_session.commit()
 
     return
-
-
-if __name__ == "__main__":
-    init_db()
