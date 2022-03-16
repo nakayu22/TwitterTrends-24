@@ -29,7 +29,7 @@ def init_db():
 
 
 def get_trends():
-    datum = db_session.query(models.Ttrends).order_by(models.Ttrends.created.desc()).limit(12)
+    datum = db_session.query(models.Ttrends).order_by(models.Ttrends.created.desc()).limit(24)
     
     trends = []
     for data in datum:
