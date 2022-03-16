@@ -30,3 +30,5 @@
     margin: auto;
     text-align: center;
   }
+
+  .card-warpper{overflow-x: scroll;}

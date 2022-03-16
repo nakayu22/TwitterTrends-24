@@ -2,44 +2,21 @@
 
 {% block content %}
 
-  <div class="container d-flex justify-content-center">
-    <div class="accordion" id="accordionPanels">
+  <div class="container-fluid">
+    <div class="card-warpper row flex-nowrap">
       {% for trend in trends %}
-      {% if loop.first %}
-      <div class="accordion-item">
-        <h2 class="accordion-header" id={{ "panelsStayOpen-heading" ~ loop.index }}>
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={{ "#panelsStayOpen-collapse" ~ loop.index }} aria-expanded="true" aria-controls={{ "panelsStayOpen-collapse" ~ loop.index }}>
-            {{ trend.date }}のトレンド
-          </button>
-        </h2>
-        <div id={{ "panelsStayOpen-collapse" ~ loop.index }} class="accordion-collapse collapse show" aria-labelledby={{ "panelsStayOpen-heading" ~ loop.index }}>
-          <div class="accordion-body">
+      <div class="col-sm-12 col-md-6 col-lg-3">
+        <div class="card">
+          <div class="card-body">
+            <h4 class="card-title">{{ trend.date }}</h4>
             <div class="list-group">
               {% for t in trend.topics %}
               <a href={{ t.url }} class="list-group-item list-group-item-action">{{ t.rank }}.　{{ t.topic }}</a>
               {% endfor %}
             </div>
-          </div>  
+          </div>
         </div>
       </div>
-      {% else %}
-      <div class="accordion-item">
-        <h2 class="accordion-header" id={{ "panelsStayOpen-heading" ~ loop.index }}>
-          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={{ "#panelsStayOpen-collapse" ~ loop.index }} aria-expanded="false" aria-controls={{ "panelsStayOpen-collapse" ~ loop.index }}>
-            {{ trend.date }}のトレンド
-          </button>
-        </h2>
-        <div id={{ "panelsStayOpen-collapse" ~ loop.index }} class="accordion-collapse collapse" aria-labelledby={{ "panelsStayOpen-heading" ~ loop.index }}>
-          <div class="accordion-body">
-            <div class="list-group">
-              {% for t in trend.topics %}
-              <a href={{ t.url }} class="list-group-item list-group-item-action">{{ t.rank }}.　{{ t.topic }}</a>
-              {% endfor %}
-            </div>
-          </div>  
-        </div>
-      </div>
-      {% endif %}
       {% endfor %}
     </div>
   </div>
