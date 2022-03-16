@@ -16,3 +16,4 @@ class Ttrends(Base):
 
     def __repr__(self):
         return f'id={self.id!r}\ntrends={self.trends}\ncreatedat={self.created}'
+    
