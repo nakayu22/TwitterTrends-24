@@ -11,14 +11,21 @@
             <h4 class="card-title">{{ trend.date }}</h4>
             <div class="list-group">
               {% for t in trend.topics %}
+              {% if loop.index < 21 %}
               <a href={{ t.url }} class="list-group-item list-group-item-action">{{ t.rank }}.　{{ t.topic }}</a>
+              {% else %}
+              <div class="collapse" id="collapseDetail">
+                <a href={{ t.url }} class="list-group-item list-group-item-action">{{ t.rank }}.　{{ t.topic }}</a>
+              </div>
+              {% endif %}
               {% endfor %}
             </div>
+            <a class="detail-trigger" data-bs-toggle="collapse" href="#collapseDetail" role="button" aria-expanded="false" aria-controls="collapseDetail">表示数の切り替え</a>
           </div>
         </div>
       </div>
       {% endfor %}
     </div>
   </div>
-
+  
 {% endblock %}
