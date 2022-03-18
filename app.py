@@ -7,8 +7,8 @@ from database import db_session, get_trends
 app = Flask(__name__)
 
 # sched = BackgroundScheduler(daemon=True, timezone="Asia/Tokyo")
-# sched.add_job(store_ttrends, 'cron', hour='0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22')
-# sched.add_job(delete_ttrends, 'cron', hour='23', day_of_week='fri')
+# sched.add_job(store_ttrends, "cron", hour="0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22")
+# sched.add_job(delete_ttrends, "cron", hour="23", day_of_week="fri")
 # sched.start()
 
 
@@ -23,5 +23,5 @@ def shutdown_session(exception=None):
     db_session.remove()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(use_reloader=False)
