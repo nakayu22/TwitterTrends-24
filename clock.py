@@ -1,6 +1,6 @@
 from database import store_ttrends, delete_ttrends
 from apscheduler.schedulers.blocking import BlockingScheduler
-import urllib.request
+# import urllib.request
 
 
 # def keep_alive():

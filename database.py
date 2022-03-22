@@ -22,11 +22,14 @@ Base.query = db_session.query_property()
 import models
 
 
+# テーブルの作成
 def init_db():
     Base.metadata.create_all(bind=engine)
 
 
+# 表示させるTwitterのトレンドの取得
 def get_trends():
+    # 24時間のデータ取得
     datum = db_session.query(models.Ttrends).order_by(models.Ttrends.created.desc()).limit(24)
     
     trends = []
@@ -42,22 +45,23 @@ def get_trends():
     return trends
 
 
+# 現在のTwitterトレンドを保存
 def store_ttrends():
     # Twitterオブジェクトの生成
     auth = tweepy.OAuthHandler(API_Key, API_Sec)
     auth.set_access_token(Token, Token_Sec)
     api = tweepy.API(auth)
 
-    #日本のWOEID
+    # 日本のWOEID
     woeid = 23424856
-    #トレンド一覧取得
+    # トレンド一覧取得
     ttrends = api.get_place_trends(woeid)
     l = ttrends[0]["trends"]
     trends = []
     for d in l:
         trends.append(list(d.values()))
 
-    # 現在の日本の時刻
+    # 現在の時刻
     now = datetime.datetime.now()
 
     t = models.Ttrends(trends=trends, created=now)
@@ -69,7 +73,9 @@ def store_ttrends():
     return
 
 
+# Twitterのトレンドのデータを削除
 def delete_ttrends():
+    # 31日以上前のデータを対象
     now = datetime.datetime.now()
     last = now + datetime.timedelta(days=-31)
 
