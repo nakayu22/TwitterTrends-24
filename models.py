@@ -3,7 +3,7 @@ from database import Base
 
 
 class Ttrends(Base):
-    __tablename__ = 'twitter_trends'
+    __tablename__ = "twitter_trends"
     id = Column(Integer, primary_key=True)
     trends = Column(PickleType)
     created = Column(DateTime)
@@ -15,5 +15,5 @@ class Ttrends(Base):
 
 
     def __repr__(self):
-        return f'id={self.id!r}\ntrends={self.trends}\ncreatedat={self.created}'
+        return f"id={self.id!r}\ntrends={self.trends}\ncreatedat={self.created}"
     
