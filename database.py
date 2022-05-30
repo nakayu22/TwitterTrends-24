@@ -83,6 +83,6 @@ def delete_ttrends():
     db_session.delete(data)
     db_session.commit()
 
-    print("deleted twitter trends.")
+    print("deleted twitter trends.(" + str(len(data)) + ")")
 
     return

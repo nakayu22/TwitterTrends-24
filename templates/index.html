@@ -1,31 +1,34 @@
 {% extends "index_base.html" %}
 
 {% block content %}
-
-  <div class="container-fluid">
-    <div class="card-warpper row flex-nowrap">
-      {% for trend in trends %}
-      <div class="col-sm-12 col-md-6 col-lg-3">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title">{{ trend.date }}</h4>
-            <div class="list-group">
-              {% for t in trend.topics %}
-              {% if loop.index < 21 %}
+<h3 style="text-align:center">話題のワード</h3>
+<img src="../static/img/wc.png" width="480" height="320" style="display: block; margin: auto;">
+<br>
+<h3 style="text-align:center">今日のトレンド</h3>
+<div class="container-fluid">
+  <div class="card-warpper row flex-nowrap">
+    {% for trend in trends %}
+    <div class="col-sm-12 col-md-6 col-lg-3">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">{{ trend.date }}</h4>
+          <div class="list-group">
+            {% for t in trend.topics %}
+            {% if loop.index < 21 %}
+            <a href={{ t.url }} class="list-group-item list-group-item-action">{{ t.rank }}.　{{ t.topic }}</a>
+            {% else %}
+            <div class="collapse" id="collapseDetail">
               <a href={{ t.url }} class="list-group-item list-group-item-action">{{ t.rank }}.　{{ t.topic }}</a>
-              {% else %}
-              <div class="collapse" id="collapseDetail">
-                <a href={{ t.url }} class="list-group-item list-group-item-action">{{ t.rank }}.　{{ t.topic }}</a>
-              </div>
-              {% endif %}
-              {% endfor %}
             </div>
-            <a class="detail-trigger" data-bs-toggle="collapse" href="#collapseDetail" role="button" aria-expanded="false" aria-controls="collapseDetail">表示数の切り替え</a>
+            {% endif %}
+            {% endfor %}
           </div>
+          <a class="detail-trigger" data-bs-toggle="collapse" href="#collapseDetail" role="button" aria-expanded="false" aria-controls="collapseDetail">表示数の切り替え</a>
         </div>
       </div>
-      {% endfor %}
     </div>
+    {% endfor %}
   </div>
+</div>
   
 {% endblock %}

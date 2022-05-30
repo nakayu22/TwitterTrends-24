@@ -2,12 +2,15 @@ from flask import Flask, render_template
 from database import db_session, get_trends
 from database import db_session, get_trends, store_ttrends, delete_ttrends
 from apscheduler.schedulers.background import BackgroundScheduler
+from wc import makeWc
 
 
 app = Flask(__name__)
 
+# 定期実行
 sched = BackgroundScheduler(timezone="Asia/Tokyo")
 sched.add_job(store_ttrends, "cron", hour="0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23")
+sched.add_job(makeWc, "cron", hour="0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23", second="30")
 sched.add_job(delete_ttrends, "cron", hour="23", minute="30", day_of_week="fri")
 sched.start()
 
