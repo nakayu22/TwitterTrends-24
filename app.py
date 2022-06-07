@@ -2,7 +2,7 @@ from flask import Flask, render_template
 from database import db_session, get_trends
 from database import db_session, get_trends, store_ttrends, delete_ttrends
 from apscheduler.schedulers.background import BackgroundScheduler
-from wc import makeWc
+from wc import createWc
 
 
 app = Flask(__name__)

@@ -4,7 +4,7 @@ from database import get_trends
 
 
 # トレンドからwordcloudを作成
-def makeWc():
+def createWc():
     trends_day = get_trends()
     
     d = defaultdict(list)
@@ -19,7 +19,7 @@ def makeWc():
         n = len(v)
         for rank in v:
             score += 1/rank
-        d_score[k] = score*n
+        d_score[k] = score/n
     
     font_path = ".fonts/ipaexg00401/ipaexg.ttf"
     wc = WordCloud(font_path=font_path, width=480, height=320, background_color="white", max_font_size=100).fit_words(d_score)
@@ -29,4 +29,4 @@ def makeWc():
 
 
 if __name__ == "__main__":
-    makeWc()
+    createWc()
