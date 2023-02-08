@@ -45,6 +45,25 @@ def get_trends():
     return trends
 
 
+# dateのTwitterのトレンドを取得
+def search_trends(date):
+    d = datetime.datetime.strptime(date, '%Y-%m-%d')
+    td_1d = datetime.timedelta(days=1)
+    datum = db_session.query(models.Ttrends).filter(d <= models.Ttrends.created, models.Ttrends.created < d + td_1d)
+
+    trends = []
+    for data in datum:
+        date = str(data.created.month)+"月"+str(data.created.day)+"日"+str(data.created.hour)+"時"
+        topics = []
+        for i, t in enumerate(data.trends):
+            topics.append({"rank": i+1, "topic": t[0], "url": t[1]})
+        
+        trend = {"date": date, "topics": topics}
+        trends.append(trend)
+
+    return trends
+
+
 # 現在のTwitterトレンドを保存
 def store_ttrends():
     # Twitterオブジェクトの生成
@@ -74,12 +93,13 @@ def store_ttrends():
 
 
 # Twitterのトレンドのデータを削除
+# 動いていない
 def delete_ttrends():
     # 31日以上前のデータを対象
     now = datetime.datetime.now()
     last = now + datetime.timedelta(days=-31)
 
-    data = db_session.query(models.Ttrends).filter(models.Ttrends.created < now).all()
+    data = db_session.query(models.Ttrends).filter(models.Ttrends.created < last).all()
     db_session.delete(data)
     db_session.commit()
 

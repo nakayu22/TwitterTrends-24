@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.4/css/all.css">
   
   <link rel="stylesheet" href="{{ url_for("static", filename="css/index.css") }}">
+
   <title>Twitterトレンド24</title>
 </head>
 
@@ -20,13 +21,20 @@
   <header>
     <div class="container-fluid mb-3 bg-light">
       <h1 class="text-info">Twitterトレンド24</h1>
-      <p class="header_p">ツイッターで日本のトレンド入りした直近24時間の話題を表示<p>
+      <p class="header-p">ツイッターで日本のトレンド入りした直近24時間の話題を表示<p>
     </div>
   </header>
 
   <main>
+    <form action="/res_search" method="get">
+      過去のトレンド
+      <input type="date" name="date" value="2023-02-08">
+      <button type="submit">検索</button>
+    </form>
+
     {% block content %}
     {% endblock %}
+
   </main>
 
   <div id="page_top"><a href="#"></a></div>

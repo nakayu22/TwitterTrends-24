@@ -33,4 +33,40 @@
 
 .card-warpper{overflow-x: scroll;}
 
-.header_p{font-size: large;}
+.header-p{font-size: large;}
+
+button{
+  background-color: gray;
+  padding: 3px;
+  text-decoration: none;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 2px 2px lightgrey;
+  border: none;
+}
+button:hover{
+  background-color: lightgray;
+}
+
+.detail-trigger{
+  margin-top: 5px;
+}
+
+.return-index{
+  background-color: gray;
+  padding: 3px;
+  text-decoration: none;
+  color: white;
+  border-radius: 10px;
+  box-shadow: 2px 2px lightgrey;
+  border: none;
+  margin-left: 12px;
+}
+.return-index:hover{
+  color: white;
+  background-color: lightgray;
+}
+
+form{
+  margin-left: 12px;
+}

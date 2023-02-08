@@ -1,12 +1,12 @@
 {% extends "index_base.html" %}
 
 {% block content %}
-<h3 style="text-align:center">話題のワード</h3>
-<div class="text-center">
-  <img src="../static/img/wc.png" class="img-fluid">
-</div>
-<br>
-<h3 style="text-align:center">今日のトレンド</h3>
+
+{% if val == 0 %}
+<h3 style="text-align:center">{{ date }}のデータはありません。</h3>
+
+{% else %}
+<h3 style="text-align:center">{{ date }}のトレンド</h3>
 <div class="container-fluid">
   <div class="card-warpper row flex-nowrap">
     {% for trend in trends %}
@@ -32,5 +32,9 @@
   </div>
   <button class="detail-trigger" data-bs-toggle="collapse" href="#collapseDetail" aria-expanded="false" aria-controls="collapseDetail">表示数の切替</button>
 </div>
+{% endif %}
+
+<br>
+<a href="/" class="return-index">トップページへ戻る</a>
   
 {% endblock %}
